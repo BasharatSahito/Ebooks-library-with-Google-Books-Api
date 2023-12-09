@@ -67,7 +67,7 @@ class _SearchResultsState extends State<SearchResults> {
           Expanded(
             child: FutureBuilder<BooksModel>(
               future: FetchApi().getBooks(widget.searchQuery,
-                  isFreeEbookSelected! ? "&filter=free-ebooks" : ""),
+                  isFreeEbookSelected ? "&filter=free-ebooks" : ""),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const Center(child: CircularProgressIndicator());
