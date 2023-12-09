@@ -1,11 +1,12 @@
+import 'package:book_library/providers/checkbox_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+// ignore: must_be_immutable
 class AlertBox extends StatefulWidget {
-  bool isFreeEbookSelected;
-  final Function(bool) onCheckboxChanged;
+  final Function(bool?) onCheckboxChanged;
   AlertBox({
     super.key,
-    required this.isFreeEbookSelected,
     required this.onCheckboxChanged,
   });
 
@@ -24,14 +25,18 @@ class _AlertBoxState extends State<AlertBox> {
           children: [
             Row(
               children: [
-                Checkbox(
-                  value: widget
-                      .isFreeEbookSelected, // Set the initial value of the checkbox
-                  onChanged: (bool? value) {
-                    setState(() {
-                      widget.isFreeEbookSelected = value ?? false;
-                    });
-                    widget.onCheckboxChanged(widget.isFreeEbookSelected);
+                Consumer<CheckBoxProvider>(
+                  builder: (context, provider, child) {
+                    return Checkbox(
+                      value: provider.isFreeEbookSelected,
+                      onChanged: (bool? value) {
+                        provider.onCheckboxChanged(value!);
+
+                        widget.onCheckboxChanged(
+                          provider.isFreeEbookSelected,
+                        );
+                      },
+                    );
                   },
                 ),
                 const Text(

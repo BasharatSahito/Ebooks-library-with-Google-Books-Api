@@ -16,14 +16,12 @@ class _PDFViewerPageState extends State<PDFViewerPage> {
   Widget build(BuildContext context) {
     File pdfFile = File(widget.pdfPath);
     if (pdfFile.existsSync()) {
-      print("File exists");
-    } else {
-      print("File does not exist");
-    }
-    print(widget.pdfPath);
+    } else {}
     return Scaffold(
       appBar: AppBar(
-        title: const Text('PDF Viewer'),
+        title: const Text(
+          'PDF Viewer',
+        ),
       ),
       body: PDFView(
         filePath: widget.pdfPath,

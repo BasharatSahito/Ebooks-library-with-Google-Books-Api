@@ -1,6 +1,8 @@
+import 'package:book_library/providers/saved_books_provider.dart';
 import 'package:book_library/services/models/booksmodel.dart';
 import 'package:book_library/utils/my_button.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class BookDetails extends StatefulWidget {
   final Items book;
@@ -11,14 +13,31 @@ class BookDetails extends StatefulWidget {
 }
 
 class _BookDetailsState extends State<BookDetails> {
-  bool showFullDescription = false;
+  @override
+  void initState() {
+    super.initState();
+    // Check if the book is already saved
+    context.read<SavedBooksProvider>().initSavedBook(widget.book);
+  }
+
+  void _toggleSaveBook() {
+    final dataManager = context.read<SavedBooksProvider>();
+
+    if (dataManager.isBookSaved!) {
+      dataManager.removeFromSavedBooks(widget.book);
+    } else {
+      dataManager.addToSavedBooks(widget.book);
+    }
+    dataManager.toggleBookSaved();
+    // isBookSaved = !isBookSaved; // Toggle the saved state
+  }
 
   @override
   Widget build(BuildContext context) {
     var previewLink = widget.book.volumeInfo?.previewLink?.toString();
     var downloadLink = widget.book.accessInfo?.pdf?.downloadLink?.toString();
-    var bookThumbnail =
-        widget.book.volumeInfo?.imageLinks?.thumbnail.toString();
+    var bookThumbnail = widget.book.volumeInfo?.imageLinks?.thumbnail ??
+        "https://demofree.sirv.com/nope-not-here.jpg";
     var bookTitle = widget.book.volumeInfo?.title?.toString();
     var printType = widget.book.volumeInfo?.printType?.toString();
     var description = widget.book.volumeInfo?.description?.toString();
@@ -27,8 +46,6 @@ class _BookDetailsState extends State<BookDetails> {
       appBar: AppBar(
         foregroundColor: Colors.white,
         title: Text(bookTitle ?? ''),
-        backgroundColor: Colors.blue,
-        centerTitle: true,
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -38,15 +55,15 @@ class _BookDetailsState extends State<BookDetails> {
             children: [
               // Book Thumbnail
               Center(
-                child: Image(image: NetworkImage(bookThumbnail ?? '')),
+                child: Image(image: NetworkImage(bookThumbnail)),
               ),
               const SizedBox(height: 16),
 
               // Book Title
               Text(
-                'Title: ${bookTitle ?? ''}',
+                bookTitle ?? '',
                 style: const TextStyle(
-                  fontSize: 20,
+                  fontSize: 22,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -140,34 +157,41 @@ class _BookDetailsState extends State<BookDetails> {
           ),
         ),
       ),
-      bottomNavigationBar: Container(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Flexible(
-                child: MyButton(
-                  btnTitles:
-                      previewLink != null ? "Preview" : "Preview Unavailable",
-                  link: previewLink.toString(),
-                ),
-              ),
-              MyButton(
-                btnTitles:
-                    downloadLink != null ? "Download" : "Download Unavailable",
-                link: downloadLink.toString(),
-                isDisabled: downloadLink == null,
-              ),
-              const Flexible(
-                child: MyButton(
-                  btnTitles: "Add to Library",
-                ),
-              ),
-            ],
+      bottomNavigationBar: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Flexible(
+            child: MyButton(
+              btnTitles:
+                  previewLink != null ? "Preview" : "Preview Unavailable",
+              link: previewLink.toString(),
+              icon: Icons.remove_red_eye_outlined,
+            ),
           ),
-        ),
+          MyButton(
+            btnTitles:
+                downloadLink != null ? "Download" : "Download Unavailable",
+            link: downloadLink.toString(),
+            isDisabled: downloadLink == null,
+            icon: Icons.download,
+          ),
+          Flexible(
+            child: Consumer<SavedBooksProvider>(
+              builder: (context, value, child) {
+                return MyButton(
+                  btnTitles: value.isBookSaved! ? "Remove" : "Save",
+                  saveBook: true,
+                  book: widget.book,
+                  icon: value.isBookSaved!
+                      ? Icons.bookmark
+                      : Icons.bookmark_outline,
+                  onPressed: _toggleSaveBook,
+                );
+              },
+            ),
+          ),
+        ],
       ),
     );
   }

@@ -39,10 +39,7 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: const Text(
           "E Books Library",
-          style: TextStyle(color: Colors.white),
         ),
-        centerTitle: true,
-        backgroundColor: Colors.blue,
       ),
       drawer: const Drawer(
         child: MyDrawer(),

@@ -1,3 +1,4 @@
+import 'package:book_library/pages/downloadedbooks.dart';
 import 'package:book_library/pages/homepage.dart';
 import 'package:book_library/pages/saved_books.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +21,7 @@ class _MyDrawerState extends State<MyDrawer> {
             color: Colors.blue,
           ),
           child: Text(
-            'Your App Name',
+            'Ebook Library',
             style: TextStyle(
               color: Colors.white,
               fontSize: 24,
@@ -31,10 +32,10 @@ class _MyDrawerState extends State<MyDrawer> {
           title: const Text('Home'),
           onTap: () {
             Navigator.pop(context);
-            Navigator.push(
+            Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => HomePage(),
+                  builder: (context) => const HomePage(),
                 ));
           },
         ),
@@ -47,6 +48,19 @@ class _MyDrawerState extends State<MyDrawer> {
               context,
               MaterialPageRoute(
                 builder: (context) => const SavedBooks(),
+              ),
+            );
+          },
+        ),
+        ListTile(
+          title: const Text("Downloaded Books"),
+          onTap: () {
+            // Navigate to the screen for saved books or perform any action
+            Navigator.pop(context);
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const DownloadedBooks(),
               ),
             );
           },
