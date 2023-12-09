@@ -327,15 +327,21 @@ class AccessInfo {
 
 class Epub {
   final bool? isAvailable;
+  final String? downloadLink;
 
   Epub({
     this.isAvailable,
+    this.downloadLink,
   });
 
   Epub.fromJson(Map<String, dynamic> json)
-      : isAvailable = json['isAvailable'] as bool?;
+      : isAvailable = json['isAvailable'] as bool?,
+        downloadLink = json['downloadLink'] as String?;
 
-  Map<String, dynamic> toJson() => {'isAvailable': isAvailable};
+  Map<String, dynamic> toJson() => {
+        'isAvailable': isAvailable,
+        'downloadLink': downloadLink,
+      };
 }
 
 class Pdf {

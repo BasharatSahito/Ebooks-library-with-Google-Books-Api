@@ -1,3 +1,5 @@
+// code main.dart
+
 import 'package:book_library/pages/homepage.dart';
 import 'package:book_library/providers/checkbox_provider.dart';
 import 'package:book_library/providers/download_books_provider.dart';
@@ -27,7 +29,7 @@ class MyApp extends StatelessWidget {
           appBarTheme: const AppBarTheme(
             titleTextStyle: TextStyle(color: Colors.white, fontSize: 23),
             centerTitle: true,
-            backgroundColor: Colors.blue,
+            backgroundColor: Color.fromARGB(255, 25, 115, 233),
             iconTheme: IconThemeData(
               color: Colors.white,
             ),

@@ -2,7 +2,7 @@ import 'package:book_library/pages/search_results.dart';
 import 'package:flutter/material.dart';
 
 class CategoryButton extends StatefulWidget {
-  final List<String> btnTitles;
+  final List<List<dynamic>> btnTitles;
   const CategoryButton({super.key, required this.btnTitles});
 
   @override
@@ -29,11 +29,12 @@ class _CategoryButtonState extends State<CategoryButton> {
                   context,
                   MaterialPageRoute(
                     builder: (context) => SearchResults(
-                        searchQuery: widget.btnTitles[index], category: true),
+                        searchQuery: widget.btnTitles[index][0],
+                        category: true),
                   ));
             },
             style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.white,
+              backgroundColor: const Color.fromARGB(255, 7, 52, 110),
               shadowColor: Colors.grey,
               elevation: 10,
               shape: RoundedRectangleBorder(
@@ -41,9 +42,19 @@ class _CategoryButtonState extends State<CategoryButton> {
               ),
               padding: EdgeInsets.zero, // Adjust padding as needed
             ),
-            child: Text(
-              widget.btnTitles[index],
-              style: const TextStyle(fontSize: 15),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                widget.btnTitles[index][1],
+                const SizedBox(
+                  height: 5,
+                ),
+                Text(
+                  widget.btnTitles[index][0],
+                  style: const TextStyle(fontSize: 16, color: Colors.white),
+                ),
+              ],
             ),
           ),
         );

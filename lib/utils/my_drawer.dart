@@ -1,3 +1,4 @@
+// MY DRAWER CODE
 import 'package:book_library/pages/downloadedbooks.dart';
 import 'package:book_library/pages/homepage.dart';
 import 'package:book_library/pages/saved_books.dart';
@@ -14,22 +15,37 @@ class _MyDrawerState extends State<MyDrawer> {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      padding: EdgeInsets.zero,
+      padding: EdgeInsets.zero, // This removes any default padding
       children: [
         const DrawerHeader(
           decoration: BoxDecoration(
-            color: Colors.blue,
+            color: Color.fromARGB(255, 25, 115, 233),
           ),
-          child: Text(
-            'Ebook Library',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 24,
-            ),
+          child: Column(
+            mainAxisAlignment:
+                MainAxisAlignment.end, // Align content to the bottom
+            crossAxisAlignment: CrossAxisAlignment.start,
+
+            children: [
+              Text(
+                'Ebook Library',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                ),
+              ),
+            ],
           ),
         ),
         ListTile(
-          title: const Text('Home'),
+          leading: Icon(
+            Icons.home,
+            size: 28,
+          ),
+          title: Text(
+            'Home',
+            style: TextStyle(fontSize: 17),
+          ),
           onTap: () {
             Navigator.pop(context);
             Navigator.pushReplacement(
@@ -40,7 +56,14 @@ class _MyDrawerState extends State<MyDrawer> {
           },
         ),
         ListTile(
-          title: const Text('Saved Books'),
+          leading: Icon(
+            Icons.book_rounded,
+            size: 28,
+          ),
+          title: const Text(
+            'Saved Books',
+            style: TextStyle(fontSize: 17),
+          ),
           onTap: () {
             // Navigate to the screen for saved books or perform any action
             Navigator.pop(context);
@@ -53,7 +76,14 @@ class _MyDrawerState extends State<MyDrawer> {
           },
         ),
         ListTile(
-          title: const Text("Downloaded Books"),
+          leading: Icon(
+            Icons.download_for_offline,
+            size: 28,
+          ),
+          title: const Text(
+            "Downloaded Books",
+            style: TextStyle(fontSize: 17),
+          ),
           onTap: () {
             // Navigate to the screen for saved books or perform any action
             Navigator.pop(context);

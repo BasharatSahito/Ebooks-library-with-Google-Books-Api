@@ -35,7 +35,7 @@ class _BookDetailsState extends State<BookDetails> {
   @override
   Widget build(BuildContext context) {
     var previewLink = widget.book.volumeInfo?.previewLink?.toString();
-    var downloadLink = widget.book.accessInfo?.pdf?.downloadLink?.toString();
+    var downloadLink = widget.book.accessInfo?.epub?.downloadLink?.toString();
     var bookThumbnail = widget.book.volumeInfo?.imageLinks?.thumbnail ??
         "https://demofree.sirv.com/nope-not-here.jpg";
     var bookTitle = widget.book.volumeInfo?.title?.toString();
