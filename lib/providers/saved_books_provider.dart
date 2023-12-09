@@ -56,15 +56,15 @@ class SavedBooksProvider extends ChangeNotifier {
     } catch (e) {}
   }
 
-  bool? _isBookSaved;
+  // bool? _isBookSaved;
 
-  bool? get isBookSaved => _isBookSaved;
+  // bool? get isBookSaved => _isBookSaved;
 
-  void initSavedBook(Items book) {
-    _isBookSaved = isBookmarked(book);
-  }
+  // void initSavedBook(Items book) {
+  //   _isBookSaved = isBookmarked(book);
+  // }
 
-  void toggleBookSaved() {
-    _isBookSaved = !_isBookSaved!;
-  }
+  // void toggleBookSaved() {
+  //   _isBookSaved = !_isBookSaved!;
+  // }
 }

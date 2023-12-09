@@ -1,10 +1,9 @@
 import 'package:book_library/pages/book_details.dart';
-import 'package:book_library/providers/checkbox_provider.dart';
+
 import 'package:book_library/services/api_fetching.dart';
 import 'package:book_library/services/models/booksmodel.dart';
 import 'package:book_library/utils/alert.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class SearchResults extends StatefulWidget {
   final String searchQuery;
@@ -17,6 +16,7 @@ class SearchResults extends StatefulWidget {
 }
 
 class _SearchResultsState extends State<SearchResults> {
+  bool isFreeEbookSelected = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,10 +46,11 @@ class _SearchResultsState extends State<SearchResults> {
                       context: context,
                       builder: (context) {
                         return AlertBox(
+                          isFreeEbookSelected: isFreeEbookSelected,
                           onCheckboxChanged: (value) {
-                            context
-                                .read<CheckBoxProvider>()
-                                .onCheckboxChanged(value!);
+                            setState(() {
+                              isFreeEbookSelected = value!;
+                            });
                           },
                         );
                       },
@@ -63,81 +64,76 @@ class _SearchResultsState extends State<SearchResults> {
               ],
             ),
           ),
-          Consumer<CheckBoxProvider>(
-            builder: (context, value, child) {
-              return Expanded(
-                child: FutureBuilder<BooksModel>(
-                  future: FetchApi().getBooks(widget.searchQuery,
-                      value.isFreeEbookSelected! ? "&filter=free-ebooks" : ""),
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const Center(child: CircularProgressIndicator());
-                    } else if (snapshot.hasError) {
-                      return Center(child: Text('Error: ${snapshot.error}'));
-                    } else {
-                      return GridView.builder(
-                        padding: const EdgeInsets.all(16.0),
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          crossAxisSpacing: 10,
-                          mainAxisSpacing: 60,
-                        ),
-                        itemCount: snapshot.data!.items!.length,
-                        itemBuilder: (context, index) {
-                          var book = snapshot.data?.items?[index];
-                          var bookTitle =
-                              book?.volumeInfo?.title?.toString() ?? "NO TITLE";
-                          var bookThumbnail =
-                              book?.volumeInfo?.imageLinks?.thumbnail ??
-                                  "https://demofree.sirv.com/nope-not-here.jpg";
+          Expanded(
+            child: FutureBuilder<BooksModel>(
+              future: FetchApi().getBooks(widget.searchQuery,
+                  isFreeEbookSelected! ? "&filter=free-ebooks" : ""),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(child: CircularProgressIndicator());
+                } else if (snapshot.hasError) {
+                  return Center(child: Text('Error: ${snapshot.error}'));
+                } else {
+                  return GridView.builder(
+                    padding: const EdgeInsets.all(16.0),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 10,
+                      mainAxisSpacing: 60,
+                    ),
+                    itemCount: snapshot.data!.items!.length,
+                    itemBuilder: (context, index) {
+                      var book = snapshot.data?.items?[index];
+                      var bookTitle =
+                          book?.volumeInfo?.title?.toString() ?? "NO TITLE";
+                      var bookThumbnail =
+                          book?.volumeInfo?.imageLinks?.thumbnail ??
+                              "https://demofree.sirv.com/nope-not-here.jpg";
 
-                          return GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        BookDetails(book: book!),
-                                  ));
-                            },
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Expanded(
-                                  child: Image.network(
-                                    bookThumbnail,
-                                  ),
-                                ),
-                                const SizedBox(
-                                  height: 20,
-                                ),
-                                Center(
-                                  child: Text(
-                                    bookTitle,
-                                    style: const TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                  ),
-                                ),
-                                // Text(
-                                //   'Author: $bookAuthors',
-                                //   style: const TextStyle(
-                                //       overflow: TextOverflow.ellipsis),
-                                // ),
-                              ],
-                            ),
-                          );
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => BookDetails(book: book!),
+                              ));
                         },
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Expanded(
+                              child: Image.network(
+                                bookThumbnail,
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            Center(
+                              child: Text(
+                                bookTitle,
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                            ),
+                            // Text(
+                            //   'Author: $bookAuthors',
+                            //   style: const TextStyle(
+                            //       overflow: TextOverflow.ellipsis),
+                            // ),
+                          ],
+                        ),
                       );
-                    }
-                  },
-                ),
-              );
-            },
+                    },
+                  );
+                }
+              },
+            ),
           )
         ],
       ),

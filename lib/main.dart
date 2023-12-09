@@ -1,5 +1,4 @@
 import 'package:book_library/pages/homepage.dart';
-import 'package:book_library/providers/checkbox_provider.dart';
 import 'package:book_library/providers/download_books_provider.dart';
 import 'package:book_library/providers/saved_books_provider.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +18,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (context) => SavedBooksProvider()),
         ChangeNotifierProvider(create: (context) => DownloadBooksProvider()),
-        ChangeNotifierProvider(create: (context) => CheckBoxProvider())
+        // ChangeNotifierProvider(create: (context) => CheckBoxProvider())
       ],
       child: MaterialApp(
         theme: ThemeData(
