@@ -1,5 +1,7 @@
 import 'package:book_library/pages/search_results.dart';
+import 'package:book_library/providers/checkbox_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class CategoryButton extends StatefulWidget {
   final List<List<dynamic>> btnTitles;
@@ -25,6 +27,8 @@ class _CategoryButtonState extends State<CategoryButton> {
           width: 100,
           child: ElevatedButton(
             onPressed: () {
+              context.read<CheckBoxProvider>().onCheckboxChanged(false);
+              print(context.read<CheckBoxProvider>().isFreeEbookSelected);
               Navigator.push(
                   context,
                   MaterialPageRoute(

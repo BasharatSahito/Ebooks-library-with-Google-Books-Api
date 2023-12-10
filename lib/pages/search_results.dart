@@ -20,9 +20,6 @@ class SearchResults extends StatefulWidget {
 class _SearchResultsState extends State<SearchResults> {
   @override
   Widget build(BuildContext context) {
-    print(
-        "The Length of Saved Books is = ${context.read<SavedBooksProvider>().savedBooks.length}");
-    print("The value is = ${context.read<SavedBooksProvider>().isBookSaved}");
     return Scaffold(
       appBar: AppBar(
         title: Text(

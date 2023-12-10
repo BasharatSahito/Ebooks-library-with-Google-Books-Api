@@ -1,9 +1,11 @@
 //HOMEPAGE CODE
 
 import 'package:book_library/pages/search_results.dart';
+import 'package:book_library/providers/checkbox_provider.dart';
 import 'package:book_library/utils/category_buttons.dart';
 import 'package:book_library/utils/my_drawer.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -72,6 +74,8 @@ class _HomePageState extends State<HomePage> {
                 controller: searchController,
                 onSubmitted: (String value) {
                   if (searchController.text.isNotEmpty) {
+                    context.read<CheckBoxProvider>().onCheckboxChanged(false);
+                    print(context.read<CheckBoxProvider>().isFreeEbookSelected);
                     Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -93,6 +97,12 @@ class _HomePageState extends State<HomePage> {
                     icon: const Icon(Icons.search),
                     onPressed: () {
                       if (searchController.text.isNotEmpty) {
+                        context
+                            .read<CheckBoxProvider>()
+                            .onCheckboxChanged(false);
+                        print(context
+                            .read<CheckBoxProvider>()
+                            .isFreeEbookSelected);
                         Navigator.push(
                             context,
                             MaterialPageRoute(
