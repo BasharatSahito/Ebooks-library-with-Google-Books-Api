@@ -9,7 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class SavedBooksProvider extends ChangeNotifier {
   final List<Items> _savedBooks = [];
 
-  List<Items> get savedBooks => _savedBooks;
+  List<Items> get savedBooks => _savedBooks.reversed.toList();
 
   // SharedPreferences key for saved books
   static const String savedBookKey = 'saved_books';
