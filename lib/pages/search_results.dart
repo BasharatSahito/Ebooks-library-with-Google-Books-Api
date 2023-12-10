@@ -1,5 +1,6 @@
 import 'package:book_library/pages/book_details.dart';
 import 'package:book_library/providers/checkbox_provider.dart';
+import 'package:book_library/providers/saved_books_provider.dart';
 import 'package:book_library/services/api_fetching.dart';
 import 'package:book_library/services/models/booksmodel.dart';
 import 'package:book_library/utils/alert.dart';
@@ -19,6 +20,9 @@ class SearchResults extends StatefulWidget {
 class _SearchResultsState extends State<SearchResults> {
   @override
   Widget build(BuildContext context) {
+    print(
+        "The Length of Saved Books is = ${context.read<SavedBooksProvider>().savedBooks.length}");
+    print("The value is = ${context.read<SavedBooksProvider>().isBookSaved}");
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -99,6 +103,11 @@ class _SearchResultsState extends State<SearchResults> {
                                   MaterialPageRoute(
                                     builder: (context) =>
                                         BookDetails(book: book!),
+                                    // settings: RouteSettings(
+                                    //   arguments: context
+                                    //       .read<SavedBooksProvider>()
+                                    //       .isBookmarked(book!),
+                                    // ),
                                   ));
                             },
                             child: Column(

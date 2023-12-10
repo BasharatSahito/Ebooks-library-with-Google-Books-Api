@@ -38,11 +38,11 @@ class _MyDrawerState extends State<MyDrawer> {
           ),
         ),
         ListTile(
-          leading: Icon(
+          leading: const Icon(
             Icons.home,
             size: 28,
           ),
-          title: Text(
+          title: const Text(
             'Home',
             style: TextStyle(fontSize: 17),
           ),
@@ -56,7 +56,7 @@ class _MyDrawerState extends State<MyDrawer> {
           },
         ),
         ListTile(
-          leading: Icon(
+          leading: const Icon(
             Icons.book_rounded,
             size: 28,
           ),
@@ -76,7 +76,7 @@ class _MyDrawerState extends State<MyDrawer> {
           },
         ),
         ListTile(
-          leading: Icon(
+          leading: const Icon(
             Icons.download_for_offline,
             size: 28,
           ),

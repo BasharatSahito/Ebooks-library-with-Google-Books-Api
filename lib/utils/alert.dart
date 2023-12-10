@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 // ignore: must_be_immutable
 class AlertBox extends StatefulWidget {
   final Function(bool?) onCheckboxChanged;
-  AlertBox({
+  const AlertBox({
     super.key,
     required this.onCheckboxChanged,
   });

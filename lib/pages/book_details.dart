@@ -16,7 +16,7 @@ class _BookDetailsState extends State<BookDetails> {
   @override
   void initState() {
     super.initState();
-    // Check if the book is already saved
+
     context.read<SavedBooksProvider>().initSavedBook(widget.book);
   }
 
@@ -34,6 +34,10 @@ class _BookDetailsState extends State<BookDetails> {
 
   @override
   Widget build(BuildContext context) {
+    print(
+        "The Length of Saved Books is = ${context.read<SavedBooksProvider>().savedBooks.length}");
+    print("The value is = ${context.read<SavedBooksProvider>().isBookSaved}");
+
     var previewLink = widget.book.volumeInfo?.previewLink?.toString();
     var downloadLink = widget.book.accessInfo?.epub?.downloadLink?.toString();
     var bookThumbnail = widget.book.volumeInfo?.imageLinks?.thumbnail ??
