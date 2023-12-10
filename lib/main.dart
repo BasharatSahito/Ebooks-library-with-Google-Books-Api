@@ -1,5 +1,3 @@
-// code main.dart
-
 import 'package:book_library/pages/homepage.dart';
 import 'package:book_library/providers/checkbox_provider.dart';
 import 'package:book_library/providers/download_books_provider.dart';

@@ -1,11 +1,9 @@
 // ignore_for_file: use_build_context_synchronously, empty_catches
-
 import 'dart:io';
 import 'package:book_library/pages/viewpdf.dart';
 import 'package:book_library/providers/download_books_provider.dart';
 import 'package:book_library/utils/my_drawer.dart';
 import 'package:file_picker/file_picker.dart';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -54,7 +52,7 @@ class _DownloadedBooksState extends State<DownloadedBooks> {
             padding: const EdgeInsets.only(right: 12),
             child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blue,
+                  backgroundColor: const Color.fromARGB(255, 25, 115, 233),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(0.0),
                   ),
@@ -108,7 +106,6 @@ class _DownloadedBooksState extends State<DownloadedBooks> {
                             Icons.delete,
                             size: 25,
                           )),
-                      // You can add more details or actions as needed
                     );
                   },
                 )
@@ -119,19 +116,6 @@ class _DownloadedBooksState extends State<DownloadedBooks> {
                 ));
         },
       ),
-      // floatingActionButton: Tooltip(
-      //   message: 'Import downloaded books to read',
-      //   child: FloatingActionButton(
-      //     backgroundColor: Colors.blue,
-      //     onPressed: () {
-      //       // Add your onPressed logic here
-      //     },
-      //     child: Icon(
-      //       Icons.info_outline,
-      //       color: Colors.white,
-      //     ),
-      //   ),
-      // )
     );
   }
 }

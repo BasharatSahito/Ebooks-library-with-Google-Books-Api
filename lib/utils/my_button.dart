@@ -29,10 +29,16 @@ class _MyButtonState extends State<MyButton> {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton.icon(
-      icon: Icon(widget.icon),
-      label: Text(widget.btnTitles),
+      icon: Icon(
+        widget.icon,
+        color: Colors.white,
+      ),
+      label: Text(
+        widget.btnTitles,
+        style: TextStyle(color: Colors.white),
+      ),
       style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.white,
+        backgroundColor: const Color.fromARGB(255, 7, 52, 110),
         elevation: 0,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),

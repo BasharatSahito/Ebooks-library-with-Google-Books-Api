@@ -161,41 +161,44 @@ class _BookDetailsState extends State<BookDetails> {
           ),
         ),
       ),
-      bottomNavigationBar: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Flexible(
-            child: MyButton(
+      bottomNavigationBar: Container(
+        color: const Color.fromARGB(255, 7, 52, 110),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Flexible(
+              child: MyButton(
+                btnTitles:
+                    previewLink != null ? "Preview" : "Preview Unavailable",
+                link: previewLink.toString(),
+                icon: Icons.remove_red_eye_outlined,
+              ),
+            ),
+            MyButton(
               btnTitles:
-                  previewLink != null ? "Preview" : "Preview Unavailable",
-              link: previewLink.toString(),
-              icon: Icons.remove_red_eye_outlined,
+                  downloadLink != null ? "Download" : "Download Unavailable",
+              link: downloadLink.toString(),
+              isDisabled: downloadLink == null,
+              icon: Icons.download,
             ),
-          ),
-          MyButton(
-            btnTitles:
-                downloadLink != null ? "Download" : "Download Unavailable",
-            link: downloadLink.toString(),
-            isDisabled: downloadLink == null,
-            icon: Icons.download,
-          ),
-          Flexible(
-            child: Consumer<SavedBooksProvider>(
-              builder: (context, value, child) {
-                return MyButton(
-                  btnTitles: value.isBookSaved! ? "Remove" : "Save",
-                  saveBook: true,
-                  book: widget.book,
-                  icon: value.isBookSaved!
-                      ? Icons.bookmark
-                      : Icons.bookmark_outline,
-                  onPressed: _toggleSaveBook,
-                );
-              },
+            Flexible(
+              child: Consumer<SavedBooksProvider>(
+                builder: (context, value, child) {
+                  return MyButton(
+                    btnTitles: value.isBookSaved! ? "Remove" : "Save",
+                    saveBook: true,
+                    book: widget.book,
+                    icon: value.isBookSaved!
+                        ? Icons.bookmark
+                        : Icons.bookmark_outline,
+                    onPressed: _toggleSaveBook,
+                  );
+                },
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

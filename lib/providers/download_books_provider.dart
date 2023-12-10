@@ -6,7 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class DownloadBooksProvider extends ChangeNotifier {
   final List<File> _downloadedPdfFiles = [];
 
-  List<File> get downloadedPdfFiles => _downloadedPdfFiles;
+  List<File> get downloadedPdfFiles => _downloadedPdfFiles.reversed.toList();
 
   void addDownloadedBooks(File file) {
     _downloadedPdfFiles.add(file);
