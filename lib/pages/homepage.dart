@@ -115,11 +115,9 @@ class _HomePageState extends State<HomePage> {
               const SizedBox(
                 height: 25,
               ),
-              Center(
-                child: const Text(
-                  "Categories",
-                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-                ),
+              const Text(
+                "Categories",
+                style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
               ),
               const SizedBox(
                 height: 30,

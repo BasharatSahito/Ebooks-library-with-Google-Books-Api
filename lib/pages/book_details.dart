@@ -13,26 +13,23 @@ class BookDetails extends StatefulWidget {
 }
 
 class _BookDetailsState extends State<BookDetails> {
-  bool isBookSaved = false;
-
   @override
   void initState() {
     super.initState();
-    // Check if the book is already saved
+
     context.read<SavedBooksProvider>().initSavedBook(widget.book);
   }
 
   void _toggleSaveBook() {
     final dataManager = context.read<SavedBooksProvider>();
-    setState(() {
-      if (isBookSaved) {
-        dataManager.removeFromSavedBooks(widget.book);
-      } else {
-        dataManager.addToSavedBooks(widget.book);
-      }
-    });
-    // dataManager.toggleBookSaved();
-    isBookSaved = !isBookSaved; // Toggle the saved state
+
+    if (dataManager.isBookSaved!) {
+      dataManager.removeFromSavedBooks(widget.book);
+    } else {
+      dataManager.addToSavedBooks(widget.book);
+    }
+    dataManager.toggleBookSaved();
+    // isBookSaved = !isBookSaved; // Toggle the saved state
   }
 
   @override
@@ -184,12 +181,18 @@ class _BookDetailsState extends State<BookDetails> {
             icon: Icons.download,
           ),
           Flexible(
-            child: MyButton(
-              btnTitles: isBookSaved ? "Remove" : "Save",
-              saveBook: true,
-              book: widget.book,
-              icon: isBookSaved ? Icons.bookmark : Icons.bookmark_outline,
-              onPressed: _toggleSaveBook,
+            child: Consumer<SavedBooksProvider>(
+              builder: (context, value, child) {
+                return MyButton(
+                  btnTitles: value.isBookSaved! ? "Remove" : "Save",
+                  saveBook: true,
+                  book: widget.book,
+                  icon: value.isBookSaved!
+                      ? Icons.bookmark
+                      : Icons.bookmark_outline,
+                  onPressed: _toggleSaveBook,
+                );
+              },
             ),
           ),
         ],
