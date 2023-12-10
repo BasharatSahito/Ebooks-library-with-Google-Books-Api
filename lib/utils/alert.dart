@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 
-
 // ignore: must_be_immutable
 class AlertBox extends StatefulWidget {
   final Function(bool?) onCheckboxChanged;
-  bool isFreeEbookSelected;
   AlertBox({
     super.key,
     required this.onCheckboxChanged,

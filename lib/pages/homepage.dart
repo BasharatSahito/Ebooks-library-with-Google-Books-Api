@@ -1,3 +1,5 @@
+//HOMEPAGE CODE
+
 import 'package:book_library/pages/search_results.dart';
 import 'package:book_library/utils/category_buttons.dart';
 import 'package:book_library/utils/my_drawer.dart';
@@ -18,19 +20,34 @@ class _HomePageState extends State<HomePage> {
     super.initState();
   }
 
-  final List<String> buttonTitles = [
-    "Computer",
-    "Science",
-    "Politics",
-    "Art",
-    "History",
-    "Programming",
-    "Agriculture",
-    "Social Studies",
-    "Biography",
-    "Novel",
-    "Poetry",
-    "Autobiography"
+  final List<List<dynamic>> buttonTitles = [
+    ["Computer", const Icon(Icons.computer, color: Colors.white, size: 30)],
+    ["History", const Icon(Icons.history_edu, color: Colors.white, size: 30)],
+    [
+      "Agriculture",
+      const Icon(Icons.agriculture, color: Colors.white, size: 30)
+    ],
+    ["Programming", const Icon(Icons.monitor, color: Colors.white, size: 30)],
+    [
+      "Medical",
+      const Icon(Icons.medical_services_outlined, color: Colors.white, size: 30)
+    ],
+    [
+      "Science",
+      const Icon(Icons.science_outlined, color: Colors.white, size: 30)
+    ],
+    [
+      "Mathematics",
+      const Icon(Icons.calculate_rounded, color: Colors.white, size: 30)
+    ],
+    [
+      "Poetry",
+      const Icon(Icons.event_note_sharp, color: Colors.white, size: 30)
+    ],
+    [
+      "Networking",
+      const Icon(Icons.network_cell_outlined, color: Colors.white, size: 30)
+    ],
   ];
 
   @override
@@ -100,7 +117,7 @@ class _HomePageState extends State<HomePage> {
               ),
               const Text(
                 "Categories",
-                style: TextStyle(fontSize: 25),
+                style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
               ),
               const SizedBox(
                 height: 30,

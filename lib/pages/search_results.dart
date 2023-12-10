@@ -1,5 +1,5 @@
 import 'package:book_library/pages/book_details.dart';
-
+import 'package:book_library/providers/checkbox_provider.dart';
 import 'package:book_library/services/api_fetching.dart';
 import 'package:book_library/services/models/booksmodel.dart';
 import 'package:book_library/utils/alert.dart';
@@ -19,6 +19,9 @@ class _SearchResultsState extends State<SearchResults> {
   bool isFreeEbookSelected = false;
   @override
   Widget build(BuildContext context) {
+    print(
+        "The Length of Saved Books is = ${context.read<SavedBooksProvider>().savedBooks.length}");
+    print("The value is = ${context.read<SavedBooksProvider>().isBookSaved}");
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -91,49 +94,52 @@ class _SearchResultsState extends State<SearchResults> {
                           book?.volumeInfo?.imageLinks?.thumbnail ??
                               "https://demofree.sirv.com/nope-not-here.jpg";
 
-                      return GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => BookDetails(book: book!),
-                              ));
-                        },
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Expanded(
-                              child: Image.network(
-                                bookThumbnail,
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            Center(
-                              child: Text(
-                                bookTitle,
-                                style: const TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                  overflow: TextOverflow.ellipsis,
+                          return GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        BookDetails(book: book!),
+                                  ));
+                            },
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Expanded(
+                                  child: Image.network(
+                                    bookThumbnail,
+                                  ),
                                 ),
-                              ),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                Center(
+                                  child: Text(
+                                    bookTitle,
+                                    style: const TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                ),
+                                // Text(
+                                //   'Author: $bookAuthors',
+                                //   style: const TextStyle(
+                                //       overflow: TextOverflow.ellipsis),
+                                // ),
+                              ],
                             ),
-                            // Text(
-                            //   'Author: $bookAuthors',
-                            //   style: const TextStyle(
-                            //       overflow: TextOverflow.ellipsis),
-                            // ),
-                          ],
-                        ),
+                          );
+                        },
                       );
-                    },
-                  );
-                }
-              },
-            ),
+                    }
+                  },
+                ),
+              );
+            },
           )
         ],
       ),
