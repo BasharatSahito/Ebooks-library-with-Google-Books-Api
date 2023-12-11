@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
             ),
           ),
         ),
-        title: 'Flutter Demo',
+        title: 'Ebook Library',
         debugShowCheckedModeBanner: false,
         home: const HomePage(),
       ),

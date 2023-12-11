@@ -75,6 +75,7 @@ class _DownloadedBooksState extends State<DownloadedBooks> {
         builder: (context, value, child) {
           return value.downloadedPdfFiles.isNotEmpty
               ? ListView.builder(
+                  physics: const BouncingScrollPhysics(),
                   itemCount: value.downloadedPdfFiles.length,
                   itemBuilder: (context, index) {
                     var i = index + 1;

@@ -76,6 +76,7 @@ class _SearchResultsState extends State<SearchResults> {
                       return Center(child: Text('Error: ${snapshot.error}'));
                     } else {
                       return GridView.builder(
+                        physics: const BouncingScrollPhysics(),
                         padding: const EdgeInsets.all(16.0),
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(

@@ -39,6 +39,7 @@ class _SavedBooksState extends State<SavedBooks> {
                   style: TextStyle(fontSize: 16),
                 ))
               : ListView.builder(
+                  physics: const BouncingScrollPhysics(),
                   itemCount: dataManager.savedBooks.length,
                   itemBuilder: (context, index) {
                     final book = dataManager.savedBooks[index];
