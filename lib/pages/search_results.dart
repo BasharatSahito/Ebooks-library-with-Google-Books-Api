@@ -81,8 +81,8 @@ class _SearchResultsState extends State<SearchResults> {
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
-                          crossAxisSpacing: 10,
-                          mainAxisSpacing: 60,
+                          crossAxisSpacing: 20,
+                          mainAxisSpacing: 30,
                         ),
                         itemCount: snapshot.data!.items!.length,
                         itemBuilder: (context, index) {

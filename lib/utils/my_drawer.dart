@@ -27,12 +27,21 @@ class _MyDrawerState extends State<MyDrawer> {
             crossAxisAlignment: CrossAxisAlignment.start,
 
             children: [
-              Text(
-                'Ebook Library',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
-                ),
+              Row(
+                children: [
+                  Icon(
+                    Icons.book,
+                    size: 30,
+                    color: Colors.white,
+                  ),
+                  Text(
+                    'Ebook Library',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 30,
+                    ),
+                  ),
+                ],
               ),
             ],
           ),

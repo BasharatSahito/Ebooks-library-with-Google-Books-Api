@@ -1,11 +1,13 @@
 import 'package:book_library/services/models/booksmodel.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class FetchApi {
   Future<BooksModel> getBooks(String searchQuery, String filter) async {
-    print("THE VALUE OF FILTER IS : $filter");
-    var apiKey = "AIzaSyDrjrBKFLTqsg3ljsldZJxzP_JHfCFJYeI";
+    String googleApiKey = dotenv.get('GOOGLE_API_KEY', fallback: '');
+
+    var apiKey = googleApiKey;
     var url =
         "https://www.googleapis.com/books/v1/volumes?q=$searchQuery$filter&maxResults=40&key=";
     try {
@@ -14,11 +16,9 @@ class FetchApi {
       if (response.statusCode == 200) {
         return BooksModel.fromJson(data);
       } else {
-        print('Failed to fetch books. Status code: ${response.statusCode}');
         throw Exception('Failed to fetch books');
       }
-    } catch (error, stackTrace) {
-      print('Error in getBooks: $error\n$stackTrace');
+    } catch (error) {
       rethrow;
     }
   }

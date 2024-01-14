@@ -75,7 +75,7 @@ class _HomePageState extends State<HomePage> {
                 onSubmitted: (String value) {
                   if (searchController.text.isNotEmpty) {
                     context.read<CheckBoxProvider>().onCheckboxChanged(false);
-                    print(context.read<CheckBoxProvider>().isFreeEbookSelected);
+
                     Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -92,6 +92,7 @@ class _HomePageState extends State<HomePage> {
                   }
                 },
                 decoration: InputDecoration(
+                  border: const OutlineInputBorder(),
                   hintText: 'Search books...',
                   suffixIcon: IconButton(
                     icon: const Icon(Icons.search),
@@ -100,9 +101,6 @@ class _HomePageState extends State<HomePage> {
                         context
                             .read<CheckBoxProvider>()
                             .onCheckboxChanged(false);
-                        print(context
-                            .read<CheckBoxProvider>()
-                            .isFreeEbookSelected);
                         Navigator.push(
                             context,
                             MaterialPageRoute(

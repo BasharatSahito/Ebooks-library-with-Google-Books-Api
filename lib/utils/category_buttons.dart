@@ -28,7 +28,6 @@ class _CategoryButtonState extends State<CategoryButton> {
           child: ElevatedButton(
             onPressed: () {
               context.read<CheckBoxProvider>().onCheckboxChanged(false);
-              print(context.read<CheckBoxProvider>().isFreeEbookSelected);
               Navigator.push(
                   context,
                   MaterialPageRoute(

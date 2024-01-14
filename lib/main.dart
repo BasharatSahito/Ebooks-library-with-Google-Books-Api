@@ -4,8 +4,12 @@ import 'package:book_library/providers/download_books_provider.dart';
 import 'package:book_library/providers/saved_books_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-void main() {
+
+void main() async {
+
+  await dotenv.load(fileName: ".env");
   runApp(const MyApp());
 }
 

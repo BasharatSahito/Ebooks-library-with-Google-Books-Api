@@ -21,9 +21,6 @@ class SavedBooksProvider extends ChangeNotifier {
   void addToSavedBooks(Items book) {
     _savedBooks.add(book);
     _saveSavedBooks();
-    print("Book Added");
-    print("Is BookMarked After Adding: ${isBookmarked(book)}");
-    print("The Length of Saved Books after Adding is  = ${savedBooks.length}");
     notifyListeners();
   }
 
@@ -34,9 +31,6 @@ class SavedBooksProvider extends ChangeNotifier {
   void removeFromSavedBooks(Items book) {
     _savedBooks.removeWhere((savedBook) => savedBook.id == book.id);
     _saveSavedBooks();
-    print("Book Removed");
-    print("Is BookMarked After Remove: ${isBookmarked(book)}");
-    print("The Length of Saved Books after remove is  = ${savedBooks.length}");
     notifyListeners();
   }
 
@@ -67,7 +61,6 @@ class SavedBooksProvider extends ChangeNotifier {
   bool? get isBookSaved => _isBookSaved;
 
   void initSavedBook(Items book) {
-    print("Is BookMarked Contains: ${isBookmarked(book)}");
     _isBookSaved = isBookmarked(book);
   }
 

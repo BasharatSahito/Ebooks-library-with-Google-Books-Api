@@ -35,7 +35,7 @@ class _MyButtonState extends State<MyButton> {
       ),
       label: Text(
         widget.btnTitles,
-        style: TextStyle(color: Colors.white),
+        style: const TextStyle(color: Colors.white),
       ),
       style: ElevatedButton.styleFrom(
         backgroundColor: const Color.fromARGB(255, 7, 52, 110),
